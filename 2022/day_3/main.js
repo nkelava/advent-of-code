@@ -42,12 +42,33 @@ function calculatePrioritySum(rucksacks) {
     return sum;
 }
 
+function findGroupBadgeItem(rucksacks) {
+    for (let item = 0; item < rucksacks[0].length; ++item) {
+        if (rucksacks[1].includes(rucksacks[0][item]) && rucksacks[2].includes(rucksacks[0][item])) {
+            return rucksacks[0][item];
+        };
+    }
+    return;
+}
+
+function calculatePrioritySumPerGroup(rucksack) {
+    let sum = 0;
+
+    for(let i = 0; i < rucksack.length - 2; i += 3) {
+        sum += alphabet.indexOf(findGroupBadgeItem([...rucksack.slice(i, i + 3)])) + 1;
+    }
+
+    return sum;
+}
+
 
 try {
     const input = fs.readFileSync("./input.txt", "utf-8").replace(/\r/g, "").trim().split("\n");
-    let prioritySum = calculatePrioritySum(input);
-    
-    console.log(prioritySum);
+    const prioritySum = calculatePrioritySum(input);
+    const prioritySumPerGroup = calculatePrioritySumPerGroup(input);
+
+    console.log(`Total priority sum per individual: ${prioritySum}`);
+    console.log(`Total priority sum per group: ${prioritySumPerGroup}`);
 } catch (err) {
     console.error(err);
 }
