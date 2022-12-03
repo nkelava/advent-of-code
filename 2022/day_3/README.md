@@ -1,6 +1,6 @@
 Original source: [https://adventofcode.com/2022/day/3](https://adventofcode.com/2022/day/3)
 
-## --- Day 3: Rucksack Reorganization ---
+## --- **Day 3: Rucksack Reorganization** ---
 
 One Elf has the important job of loading all of the [rucksacks](https://en.wikipedia.org/wiki/Rucksack) with supplies for the jungle journey. Unfortunately, that Elf didn't quite follow the packing instructions, and so a few items now need to be rearranged.
 
@@ -35,3 +35,34 @@ To help prioritize item rearrangement, every item type can be converted to a <em
 In the above example, the priority of the item type that appears in both compartments of each rucksack is 16 (<code>p</code>), 38 (<code>L</code>), 42 (<code>P</code>), 22 (<code>v</code>), 20 (<code>t</code>), and 19 (<code>s</code>); the sum of these is <code><em>157</em></code>.
 
 Find the item type that appears in both compartments of each rucksack. <em><strong>What is the sum of the priorities of those item types?</strong></em>
+</br></br>
+## --- **Part Two** ---
+
+As you finish identifying the misplaced items, the Elves come to you with another issue.
+
+For safety, the Elves are divided into groups of three. Every Elf carries a badge that identifies their group. For efficiency, within each group of three Elves, the badge is the <em><strong>only item type carried by all three Elves</strong></em>. That is, if a group's badge is item type <code>B</code>, then all three Elves will have item type <code>B</code> somewhere in their rucksack, and at most two of the Elves will be carrying any other item type.
+
+The problem is that someone forgot to put this year's updated authenticity sticker on the badges. All of the badges need to be pulled out of the rucksacks so the new authenticity stickers can be attached.
+<>Additionally, nobody wrote down which item type corresponds to each group's badges. The only way to tell which item type is the right one is by finding the one item type that is <em><strong>common between all three Elves</strong></em> in each group.
+
+Every set of three lines in your list corresponds to a single group, but each group can have a different badge item type. So, in the above example, the first group's rucksacks are the first three lines:</p>
+
+<pre>
+<code>vJrwpWtwJgWrhcsFMMfFFhFp
+jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+PmmdzqPrVvPwwTWBwg</code>
+</pre>
+
+And the second group's rucksacks are the next three lines:
+<pre>
+<code>wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
+ttgJtRGJQctTZtZT
+CrZsJsPPZsGzwwsLwLmpwMDw
+</code>
+</pre>
+In the first group, the only item type that appears in all three rucksacks is lowercase <code>r</code>; this must be their badges. In the second group, their badge item type must be <code>Z</code>.
+
+Priorities for these items must still be found to organize the sticker attachment efforts: here, they are 18 (<code>r</code>) for the first group and 52 (<code>Z</code>) for the second group. The sum of these is <code><em>70</em></code>.
+
+Find the item type that corresponds to the badges of each three-Elf group. <em><strong>What is the sum of the priorities of those item types?</strong></em>
+
