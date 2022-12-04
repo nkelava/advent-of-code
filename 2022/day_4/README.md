@@ -47,3 +47,17 @@ This example list uses single-digit section IDs to make it easier to draw; your 
 
 Some of the pairs have noticed that one of their assignments <em><strong>fully contains</strong></em> the other. For example, <code>2-8</code> fully contains <code>3-7</code>, and <code>6-6</code> is fully contained by <code>4-6</code>. In pairs where one assignment fully contains the other, one Elf in the pair would be exclusively cleaning sections their partner will already be cleaning, so these seem like the most in need of reconsideration. In this example, there are <code><em>2</em></code> such pairs.</p>
 <em><strong>In how many assignment pairs does one range fully contain the other?</strong></em>
+</br></br>
+
+## --- Part Two ---
+
+It seems like there is still quite a bit of duplicate work planned. Instead, the Elves would like to know the number of pairs that <em><strong>overlap at all</strong></em>.
+In the above example, the first two pairs (<code>2-4,6-8</code> and <code>2-3,4-5</code>) don't overlap, while the remaining four pairs (<code>5-7,7-9</code>, <code>2-8,3-7</code>, <code>6-6,4-6</code>, and <code>2-6,4-8</code>) do overlap:
+
+<code>5-7,7-9</code> overlaps in a single section, <code>7</code>.
+<code>2-8,3-7</code> overlaps all of the sections <code>3</code> through <code>7</code>.
+<code>6-6,4-6</code> overlaps in a single section, <code>6</code>.
+<code>2-6,4-8</code> overlaps in sections <code>4</code>, <code>5</code>, and <code>6</code>.
+
+So, in this example, the number of overlapping assignment pairs is <code><em>4</em></code>.
+<em><strong>In how many assignment pairs do the ranges overlap?</strong></em>
