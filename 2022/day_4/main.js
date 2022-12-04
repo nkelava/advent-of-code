@@ -19,6 +19,14 @@ function countFullyContainedSections(sections) {
     return fullyContainedSectionsCount;
 }
 
+function countSectionOverlaps(sections) {
+    const overlapCount = sections.reduce((counter, sections) => {
+        return sections[0].some(section => sections[1].includes(section)) ? counter + 1 : counter;
+    }, 0);
+
+    return overlapCount;
+}
+
 function getSectionRange(lowerbound, size) {
     return Array.from(new Array(size), (_, i) => i + lowerbound);
 }
@@ -41,8 +49,10 @@ try {
     const input = fs.readFileSync("./input.txt", "utf-8").replace(/\r/g, "").trim().split("\n");
     const inputParsed = parseInput(input);
     const fullyContainedSectionsCount = countFullyContainedSections(inputParsed);
+    const sectionOverlapCount = countSectionOverlaps(inputParsed);
     
     console.log("Total number of fully contained sections is: ", fullyContainedSectionsCount);
+    console.log("Total number of sections overlaping is: ", sectionOverlapCount);
 } catch (err) {
     console.error(err);
 }
