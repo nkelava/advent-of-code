@@ -1,4 +1,5 @@
 Original source: [https://adventofcode.com/2022/day/1](https://adventofcode.com/2022/day/1)
+
 ## --- Day 1: Calorie Counting ---
 Santa's reindeer typically eat regular reindeer food, but they need a lot of <em>[magical energy](/2018/day/25)</em> to deliver presents on Christmas. For that, their favorite snack is a special type of <em><span style="color:yellow">star</span></em> fruit that only grows deep in the jungle. The Elves have brought you on their annual expedition to the grove where the fruit grows.
 
@@ -41,7 +42,7 @@ This list represents the Calories of the food carried by five Elves:
 In case the Elves get hungry and need extra snacks, they need to know which Elf to ask: they'd like to know how many Calories are being carried by the Elf carrying the <em>most</em> Calories. In the example above, this is <em><code>24000</code></em> (carried by the fourth Elf).
 
 Find the Elf carrying the most Calories. <em><strong>How many total Calories is that Elf carrying?</strong></em>
-
+</br></br>
 
 ## --- Part Two ---
 By the time you calculate the answer to the Elves' question, they've already realized that the Elf carrying the most Calories of food might eventually <em><strong>run out of snacks</strong></em>.
