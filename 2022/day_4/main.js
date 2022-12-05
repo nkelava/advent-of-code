@@ -6,14 +6,14 @@ function checkIfFullyIncluded(first, second) {
 
 function countFullyContainedSections(sections) {
     const fullyContainedSectionsCount = sections.reduce((counter, sections) => {
-        const intersection = sections[0].filter(section => sections[1].includes(section));
-
-        return (intersection.length === sections[0].length || intersection.length === sections[1].length) ? counter + 1 : counter;
+        const firstCheck = checkIfFullyIncluded(sections[0], sections[1]);
+        const secondCheck = checkIfFullyIncluded(sections[1], sections[0]);
+        
+        return (firstCheck || secondCheck) ? counter + 1 : counter;
 
         // Other solution I wanted to try
-        // const firstCheck = checkIfFullyIncluded(sections[0], sections[1]);
-        // const secondCheck = checkIfFullyIncluded(sections[1], sections[0]);
-        // return (firstCheck || secondCheck) ? counter + 1 : counter;
+        // const intersection = sections[0].filter(section => sections[1].includes(section));
+        // return (intersection.length === sections[0].length || intersection.length === sections[1].length) ? counter + 1 : counter;
     }, 0);
 
     return fullyContainedSectionsCount;
