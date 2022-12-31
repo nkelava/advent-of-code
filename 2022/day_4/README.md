@@ -47,7 +47,8 @@ This example list uses single-digit section IDs to make it easier to draw; your 
 
 Some of the pairs have noticed that one of their assignments <em><strong>fully contains</strong></em> the other. For example, <code>2-8</code> fully contains <code>3-7</code>, and <code>6-6</code> is fully contained by <code>4-6</code>. In pairs where one assignment fully contains the other, one Elf in the pair would be exclusively cleaning sections their partner will already be cleaning, so these seem like the most in need of reconsideration. In this example, there are <code><em>2</em></code> such pairs.</p>
 <em><strong>In how many assignment pairs does one range fully contain the other?</strong></em>
-</br></br>
+</br>
+</br>
 
 ## --- Part Two ---
 

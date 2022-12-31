@@ -31,9 +31,11 @@ This strategy guide predicts and recommends the following:
 In this example, if you were to follow the strategy guide, you would get a total score of <code><em>15</em></code> (8 + 1 + 6).
 
 <em><strong>What would your total score be if everything goes exactly according to your strategy guide?</strong></em>
-</br></br>
+</br>
+</br>
 
 ## --- Part Two ---
+
 The Elf finishes helping with the tent and sneaks back over to you. "Anyway, the second column says how the round needs to end: <code>X</code> means you need to lose, <code>Y</code> means you need to end the round in a draw, and <code>Z</code> means you need to win. Good luck!"
 
 The total score is still calculated in the same way, but now you need to figure out what shape to choose so the round ends as indicated. The example above now goes like this:

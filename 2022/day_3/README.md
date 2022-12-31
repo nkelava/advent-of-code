@@ -35,9 +35,10 @@ To help prioritize item rearrangement, every item type can be converted to a <em
 In the above example, the priority of the item type that appears in both compartments of each rucksack is 16 (<code>p</code>), 38 (<code>L</code>), 42 (<code>P</code>), 22 (<code>v</code>), 20 (<code>t</code>), and 19 (<code>s</code>); the sum of these is <code><em>157</em></code>.
 
 Find the item type that appears in both compartments of each rucksack. <em><strong>What is the sum of the priorities of those item types?</strong></em>
-</br></br>
+</br>
+</br>
 
-## --- **Part Two** ---
+## --- Part Two ---
 
 As you finish identifying the misplaced items, the Elves come to you with another issue.
 

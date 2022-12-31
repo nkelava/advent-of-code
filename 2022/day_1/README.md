@@ -42,9 +42,11 @@ This list represents the Calories of the food carried by five Elves:
 In case the Elves get hungry and need extra snacks, they need to know which Elf to ask: they'd like to know how many Calories are being carried by the Elf carrying the <em>most</em> Calories. In the example above, this is <em><code>24000</code></em> (carried by the fourth Elf).
 
 Find the Elf carrying the most Calories. <em><strong>How many total Calories is that Elf carrying?</strong></em>
-</br></br>
+</br>
+</br>
 
 ## --- Part Two ---
+
 By the time you calculate the answer to the Elves' question, they've already realized that the Elf carrying the most Calories of food might eventually <em><strong>run out of snacks</strong></em>.
 
 To avoid this unacceptable situation, the Elves would instead like to know the total Calories carried by the <em><strong>top three</strong></em> Elves carrying the most Calories. That way, even if one of those Elves runs out of snacks, they still have two backups.
