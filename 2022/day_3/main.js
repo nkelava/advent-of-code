@@ -2,7 +2,6 @@ const fs = require("fs");
 
 const alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-
 function findIntersectionItemOtherOptions(rucksack, option){
     const half = rucksack.length / 2;
     const firstCompartment = [...rucksack.slice(0, half)];
@@ -55,12 +54,13 @@ function calculatePrioritySumPerGroup(rucksack) {
     let sum = 0;
 
     for(let i = 0; i < rucksack.length - 2; i += 3) {
-        sum += alphabet.indexOf(findGroupBadgeItem([...rucksack.slice(i, i + 3)])) + 1;
+        const intersectionItem = findGroupBadgeItem([...rucksack.slice(i, i + 3)]); 
+        
+        sum += alphabet.indexOf(intersectionItem) + 1;
     }
 
     return sum;
 }
-
 
 try {
     const input = fs.readFileSync("./input.txt", "utf-8").replace(/\r/g, "").trim().split("\n");
