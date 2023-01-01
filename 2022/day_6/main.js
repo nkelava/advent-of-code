@@ -1,4 +1,3 @@
-const { setDefaultResultOrder } = require("dns");
 const fs = require("fs");
 
 function findSoPMarker(datastream) {
