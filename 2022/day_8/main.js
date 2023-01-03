@@ -1,4 +1,5 @@
 const fs = require("fs");
+const { arrayBuffer } = require("stream/consumers");
 
 function get2DMap(input) {
     const mapHeight = input.length;
@@ -17,36 +18,40 @@ function checkEdge(map, rowIndex, treeIndex) {
     return (rowIndex === 0 || rowIndex === height || treeIndex === 0 || treeIndex === width);
 }
 
-function checkHorizontal(row, treeIndex, direction) {
-    start = (direction === "left") ? 0 : treeIndex + 1;
-    end = (direction === "left") ? treeIndex : row.length;
+function checkHorizontal(row, treeIndex) {
+    let foundGreaterCount = 0;
 
-    for(let i = start; i < end; ++i) {
+    for(let i = 0; i < row.length; ++i) {
+        if(i === treeIndex) continue;
+
         if(Number(row[i]) >= Number(row[treeIndex])) {
-            return false;
+            ++foundGreaterCount;
+            i = (i < treeIndex) ? treeIndex : row.length;
         }
     }
-    return true;
+
+    return (foundGreaterCount > 1) ? false : true;
 }
 
-function checkVertical(map, row, column, direction) {
-    start = (direction === "up") ? 0 : row + 1;
-    end = (direction === "up") ? row : map.length;
+function checkVertical(map, row, column) {
+    let foundGreaterCount = 0;
 
-    for(let i = start; i < end; ++i) {
+    for(let i = 0; i < map.length; ++i) {
+        if (i === row) continue;
+
         if(Number(map[i][column]) >= Number(map[row][column])) {
-            return false;
+            ++foundGreaterCount;
+            i = (i < row) ? row : map.length;
         }
     }
-    return true;
+
+    return (foundGreaterCount > 1) ? false : true;
 }
 
 function checkIfVisible(map, rowIndex, treeIndex) {
     return (checkEdge(map, rowIndex, treeIndex)
-    || checkHorizontal(map[rowIndex], treeIndex, "left") 
-    || checkHorizontal(map[rowIndex], treeIndex, "right")
-    || checkVertical(map, rowIndex, treeIndex, "up")
-    || checkVertical(map, rowIndex, treeIndex, "down"));
+    || checkHorizontal(map[rowIndex], treeIndex)
+    || checkVertical(map, rowIndex, treeIndex));
 }
 
 function countVisibleTrees(map) {
