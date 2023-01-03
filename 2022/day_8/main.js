@@ -49,9 +49,10 @@ function checkVertically(map, row, column) {
 }
 
 function checkIfVisible(map, rowIndex, treeIndex) {
-    return (checkEdge(map, rowIndex, treeIndex)
-    || checkHorizontally(map[rowIndex], treeIndex)
-    || checkVertically(map, rowIndex, treeIndex));
+    if(checkEdge(map, rowIndex, treeIndex)) return true;
+    if(checkHorizontally(map[rowIndex], treeIndex)) return true;
+    if(checkVertically(map, rowIndex, treeIndex)) return true;
+    return false;
 }
 
 function countVisibleTrees(map) {
