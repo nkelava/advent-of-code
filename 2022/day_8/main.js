@@ -18,7 +18,7 @@ function checkEdge(map, rowIndex, treeIndex) {
     return (rowIndex === 0 || rowIndex === height || treeIndex === 0 || treeIndex === width);
 }
 
-function checkHorizontal(row, treeIndex) {
+function checkHorizontally(row, treeIndex) {
     let foundGreaterCount = 0;
 
     for(let i = 0; i < row.length; ++i) {
@@ -33,7 +33,7 @@ function checkHorizontal(row, treeIndex) {
     return (foundGreaterCount > 1) ? false : true;
 }
 
-function checkVertical(map, row, column) {
+function checkVertically(map, row, column) {
     let foundGreaterCount = 0;
 
     for(let i = 0; i < map.length; ++i) {
@@ -50,8 +50,8 @@ function checkVertical(map, row, column) {
 
 function checkIfVisible(map, rowIndex, treeIndex) {
     return (checkEdge(map, rowIndex, treeIndex)
-    || checkHorizontal(map[rowIndex], treeIndex)
-    || checkVertical(map, rowIndex, treeIndex));
+    || checkHorizontally(map[rowIndex], treeIndex)
+    || checkVertically(map, rowIndex, treeIndex));
 }
 
 function countVisibleTrees(map) {
