@@ -58,7 +58,12 @@ function createFileSystemTreeRecursion(terminalOutput, index, fileSystemTree, pw
     return createFileSystemTree(terminalOutput, ++index, fileSystemTree, pwd)
 }
 
+function findDirectoryToDelete(fileSystemTree, size) {
+    return fileSystemTree.findGreaterOrEqualSize(size);
+}
+
 module.exports = {
     createFileSystemTree,
-    createFileSystemTreeRecursion
+    createFileSystemTreeRecursion,
+    findDirectoryToDelete
 };

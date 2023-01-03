@@ -69,6 +69,25 @@ class Tree {
 
         return null;
     }
+
+    findGreaterOrEqualSize(size) {
+        let closestNode = this.preOrderTraversal().next().value;
+        let minDifference = closestNode.size;
+        let difference = 0;
+
+        for(let node of this.preOrderTraversal()) {
+            if(node.size < size) continue;
+
+            difference = node.size - size; 
+            
+            if(difference < minDifference) {
+                closestNode = node;
+                minDifference = difference;
+            }
+        }
+
+        return closestNode;
+    }
 }
 
 module.exports = Tree;
