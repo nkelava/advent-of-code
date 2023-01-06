@@ -1,7 +1,7 @@
-const point = require("./point");
+const Point = require("./point");
 
-function getVisitedPositions(instructions) {
-    let head = [0, 0], tail = [0, 0], tailVisited = []; 
+function getVisitedPositions(instructions, pointCount) {
+    const points = new Array(pointCount).fill(null).map(() => new Point(0, 0));
     let direction, steps, previousHeadPosition;
 
     instructions.forEach(instruction => {
@@ -10,19 +10,16 @@ function getVisitedPositions(instructions) {
         steps = Number(instruction[1]);
         
         for(let i = 0; i < steps; ++i) {
-            previousHeadPosition = [...head];
-
-            point.move(head, direction);
+            previousHeadPosition = new Point(points[0].x, points[0].y);
+            
+            points[0].move(direction);
        
-            if(point.calculateDistance(head, tail) > 1) {
-                tail = previousHeadPosition;
-                tailVisited.push(tail);
+            if(points[0].calculateDistance(points[1]) > 1) {
+                points[1].setPosition(previousHeadPosition);
             }
         }
-        
-    })
-
-    return tailVisited;
+    });
+    return points[1].getVisitedUnique();
 }
 
 module.exports = {
