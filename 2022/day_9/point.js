@@ -1,25 +1,53 @@
-function calculateDistance(pointA, pointB) {
-    return Math.floor(Math.sqrt(Math.pow(pointB[0]-pointA[0], 2) + (Math.pow(pointB[1] - pointA[1], 2))));
-}
+const { urlToHttpOptions } = require("url");
 
-function move(point, direction) {
-    switch(direction) {
-        case "U":
-            ++point[1];
-            break;
-        case "R":
-            ++point[0];
-            break;
-        case "D":
-            --point[1]; 
-            break;
-        case "L":
-            --point[0];
-            break;
+class Point {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.visited = [];
+    }
+
+    setPosition(point) {
+        this.x = point.x;
+        this.y = point.y;
+
+        this.updateVisited(point);
+    }
+
+    getPosition() {
+        return [this.x, this.y];
+    }
+
+    updateVisited(point) {
+        this.visited.push(point);
+    }
+
+    calculateDistance(other) {
+        return Math.floor(Math.sqrt(Math.pow(other.x - this.x, 2) + (Math.pow(other.y - this.y, 2))));
+    }
+
+    move(direction) {
+        switch(direction) {
+            case "U":
+                ++(this.y);
+                break;
+            case "R":
+                ++(this.x);
+                break;
+            case "D":
+                --(this.y); 
+                break;
+            case "L":
+                --(this.x);
+                break;
+        }
+        console.log(`[${this.x}, ${this.y}]`)
+        this.updateVisited(new Point(this.x, this.y));
+    }
+
+    getVisitedUnique() {
+        return this.visited.map(JSON.stringify).filter((point, i , visited)=> i === visited.indexOf(point)).map(JSON.parse);
     }
 }
 
-module.exports = {
-    move,
-    calculateDistance
-}
+module.exports = Point;
