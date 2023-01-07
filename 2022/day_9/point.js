@@ -1,25 +1,19 @@
-const { urlToHttpOptions } = require("url");
-
-class Point {
+class Knot {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.visited = [];
+        this.visited = [[x, y]];
     }
 
-    setPosition(point) {
-        this.x = point.x;
-        this.y = point.y;
+    changePosition(x, y) {
+        this.x = x;
+        this.y = y;
 
-        this.updateVisited(point);
+        this.updateVisited(this.x, this.y);
     }
 
-    getPosition() {
-        return [this.x, this.y];
-    }
-
-    updateVisited(point) {
-        this.visited.push(point);
+    updateVisited(x, y) {
+        this.visited.push([x, y]);
     }
 
     calculateDistance(other) {
@@ -41,13 +35,13 @@ class Point {
                 --(this.x);
                 break;
         }
-        console.log(`[${this.x}, ${this.y}]`)
-        this.updateVisited(new Point(this.x, this.y));
+
+        this.updateVisited(this.x, this.y);
     }
 
     getVisitedUnique() {
-        return this.visited.map(JSON.stringify).filter((point, i , visited)=> i === visited.indexOf(point)).map(JSON.parse);
+        return this.visited.map(JSON.stringify).filter((knot, i , visited)=> i === visited.indexOf(knot)).map(JSON.parse);
     }
 }
 
-module.exports = Point;
+module.exports = Knot;
