@@ -3,9 +3,8 @@ const Knot = require("./point");
 
 function simulateSeriesOfMotions(instructions, knotCount, startX, startY) {
     const rope = new Array(knotCount).fill(null).map(() => new Knot(startX, startY));
-    let direction, steps, prevHead;
-    let head = rope[0];
-    let tail = rope[1];
+    let head = rope[0], tail = rope[1];
+    let direction, steps;
 
     instructions.forEach(instruction => {
         instruction = instruction.split(" ");
@@ -13,12 +12,10 @@ function simulateSeriesOfMotions(instructions, knotCount, startX, startY) {
         steps = Number(instruction[1]);
         
         for(let i = 0; i < steps; ++i) {
-            prevHead = new Knot(head.x, head.y);
-            
             head.move(direction);
        
             if(tail.calculateDistance(head) > 1) {
-                tail.changePosition(prevHead.x, prevHead.y);
+                tail.updatePosition(head.x, head.y);
             }
         }
     });

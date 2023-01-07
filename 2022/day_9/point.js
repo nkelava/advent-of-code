@@ -5,9 +5,9 @@ class Knot {
         this.visited = [[x, y]];
     }
 
-    changePosition(x, y) {
-        this.x = x;
-        this.y = y;
+    updatePosition(x, y) {
+        this.x += (this.x < x) ? 1 : (this.x > x) ? -1 : 0;
+        this.y += (this.y < y) ? 1 : (this.y > y) ? -1 : 0;
 
         this.updateVisited(this.x, this.y);
     }
@@ -18,6 +18,10 @@ class Knot {
 
     calculateDistance(other) {
         return Math.floor(Math.sqrt(Math.pow(other.x - this.x, 2) + (Math.pow(other.y - this.y, 2))));
+    }
+
+    isDiagonal(other) {
+        return Math.abs(this.y - this.x) === Math.abs(other.y - other.x);
     }
 
     move(direction) {
