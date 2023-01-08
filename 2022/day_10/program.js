@@ -1,6 +1,7 @@
 const Instruction = require("./instruction");
 const Command = require("./command");
 const Measurement = require("./measurement");
+const CRT = require("./crt");
 
 class Program {
     constructor() {
@@ -12,6 +13,7 @@ class Program {
         this.cycle = 1;
         this.register = 1;
         this.measurement = new Measurement(20, 220, 40);
+        this.crt = new CRT(6);
     }
     
     add(instruction) {
@@ -30,10 +32,9 @@ class Program {
 
     run(instructions) {
         this.parse(instructions);
-
+        
         this.instructions.forEach(instruction => {
             this.runCycles(instruction.command.cycleDuration);
-            if(this.cycle > this.measurement.end) return;
             this.register += instruction.argument;
         });
     }
@@ -43,6 +44,9 @@ class Program {
             if(this.cycle % this.measurement.step === this.measurement.start) {
                 this.measurement.increaseSum(this.cycle * this.register);
             }
+            
+            this.crt.drawPixel(this.register);
+            
             ++this.cycle;
         }
     }
