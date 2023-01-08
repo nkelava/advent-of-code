@@ -13,7 +13,7 @@ class Program {
         this.cycle = 1;
         this.register = 1;
         this.measurement = new Measurement(20, 220, 40);
-        this.crt = new CRT(6);
+        this.crt = new CRT(6, 40);
     }
     
     add(instruction) {
@@ -40,14 +40,13 @@ class Program {
     }
 
     runCycles(duration) {
-        for(let i = 0; i < duration; ++i) {
+        for(let i = 0; i < duration; i++) {
             if(this.cycle % this.measurement.step === this.measurement.start) {
                 this.measurement.increaseSum(this.cycle * this.register);
             }
             
             this.crt.drawPixel(this.register);
-            
-            ++this.cycle;
+            this.cycle++;
         }
     }
 }

@@ -1,40 +1,42 @@
 class CRT {
-    constructor(height) {
+    constructor(height, width) {
         this.screen = new Array(height).fill("........................................");
-        this.rowLength = 40;
-        this.currentRow = 0;
-        this.currentDrawPosition = 0;
+        this.height = height;
+        this.width = width;
+        this.currentPixelRow = 0;
+        this.currentPixelColumn = 0;
     }
 
     drawPixel(register) {
         const sprite = [register - 1, register, register + 1];
 
-        if(sprite.includes(this.currentDrawPosition)) {
-            this.changePixel();
+        if(sprite.includes(this.currentPixelColumn)) {
+            this.changePixelValue();
         }
         
-        this.move();
+        this.movePixel();
     }
 
-    changePixel() {
-        const row = this.screen[this.currentRow];
-        const left = row.substring(0, this.currentDrawPosition);
-        const right = row.substring(this.currentDrawPosition + 1);
-        this.screen[this.currentRow] = left + "#" + right;
+    changePixelValue() {
+        const pixelRow = this.screen[this.currentPixelRow];
+        const leftPixels = pixelRow.substring(0, this.currentPixelColumn);
+        const rightPixels = pixelRow.substring(this.currentPixelColumn + 1);
+        this.screen[this.currentPixelRow] = leftPixels + "#" + rightPixels;
     }
 
-    move() {
-        if (this.currentDrawPosition > 38 && this.currentRow < 6) {
-            ++this.currentRow;
-            this.currentDrawPosition = 0;
-            return;
-        }        
+    movePixel() {
+        if(this.currentPixelRow >= this.height || this.currentPixelColumn >= this.width) return;    
+        const pixelColumnAtEnd = (this.currentPixelColumn === this.width - 1);
         
-        ++this.currentDrawPosition;
+        if(pixelColumnAtEnd) this.currentPixelRow++;
+    
+        this.currentPixelColumn = (pixelColumnAtEnd) ? 0 : this.currentPixelColumn + 1;
     }
 
     display() {
-        this.screen.forEach(row => console.log(row));
+        console.log("CRT: \n");
+        this.screen.forEach(pixelRow => console.log(pixelRow));
+        console.log("\n");
     }
 }
 
