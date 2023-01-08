@@ -34,8 +34,7 @@ class CRT {
     }
 
     display() {
-        // this.screen.forEach(row => console.log(row));
-        console.log(this.screen)
+        this.screen.forEach(row => console.log(row));
     }
 }
 
