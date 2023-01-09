@@ -14,7 +14,7 @@ try {
     device.run(cpuInstructions);
 
     console.log(`Sum of the first six signal strenghts is ${device.cpu.measurement.sum}.`);
-    // device.crt.display();
+    device.crt.display();
 } catch (error) {
     console.log(error);
 }

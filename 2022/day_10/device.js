@@ -12,8 +12,8 @@ class Device {
         this.cpu.insertProgram(instructions);
 
         while(this.cpu.programActive) {
+            this.crt.drawPixel(this.cpu.register);
             this.cpu.runCycle(this.cycle);
-            // this.crt.drawPixel();
             this.cycle++;
         }
     }
