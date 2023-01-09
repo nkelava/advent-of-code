@@ -1,13 +1,20 @@
 const fs = require("fs");
-const Program = require("./program");
+const Device = require("./device");
 
 try {
-    const input = fs.readFileSync("./input.txt", "utf-8").replace(/\r/g, "").split("\n");
-    const program = new Program();
-    program.run(input);
+    const cpuInstructions = fs.readFileSync("./input.txt", "utf-8").replace(/\r/g, "").split("\n");
+    const crt = {
+        screen: {
+            height: 6,
+            width: 40
+        }
+    };
     
-    console.log(`Sum of the first six signal strenghts is ${program.measurement.sum}.`);
-    program.crt.display();
+    const device = new Device(crt.screen.height, crt.screen.width);
+    device.run(cpuInstructions);
+
+    console.log(`Sum of the first six signal strenghts is ${device.cpu.measurement.sum}.`);
+    // device.crt.display();
 } catch (error) {
     console.log(error);
 }

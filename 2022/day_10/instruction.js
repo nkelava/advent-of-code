@@ -1,7 +1,7 @@
 class Instruction {
     constructor(command, argument = null) {
-       this.command = command;
-       this.argument = argument; 
+        this.command = command;
+        this.argument = argument;
     }
 }
 
