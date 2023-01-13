@@ -1,18 +1,22 @@
 class Operation {
+    // Operation: new = old * 3
     constructor(description) {
         this.description = description;
-        this.operator = this.getOperator();
-        this.value = this.getValue();
+        this.operator = this.parseOperator();
+        this.value = this.parseValue();
     }
 
-    // Operation: new = old * 3
-    getOperator() {
+    parseOperator() {
         const re = new RegExp("[\+|\-|\*|\/]");
-        return this.description.match(re).at(0);
+        const operator = this.description.match(re);
+
+        if(!operator) throw new Error(`Something went wrong while parsing the operator in operation: ${this.description}`);
+
+        return operator[0];
     }
 
-    getValue() {
-        return Number(this.description.slice(this.description.lastIndexOf(" ")).trimStart());
+    parseValue() {
+        return Number(this.description.slice(this.description.lastIndexOf(" ")).trim());
     }
 
     run(item) {
@@ -28,7 +32,7 @@ class Operation {
             case "/":
                 return item / this.value;
             default:
-                return null;
+                throw new Error("Something went wrong with operation execution.");
         }
     }
 }
