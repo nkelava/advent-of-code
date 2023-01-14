@@ -31,7 +31,7 @@ Monkey 4:
   Operation: new = old + 7
   Test: divisible by 19
     If true: throw to monkey 5
-    If false: throw to monkey 7 
+    If false: throw to monkey 7
 
 Monkey 5:
   Starting items: 78

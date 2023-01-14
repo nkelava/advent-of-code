@@ -1,6 +1,7 @@
 const Monkey = require("./monkey");
 const Operation = require("./operation");
 const Test = require("./test");
+const compare = require("./utils");
 
 class KeepAway {
     constructor(notes, rounds) {
@@ -32,6 +33,20 @@ class KeepAway {
     
         return this.parseNotes(notes, monkeyStartIndex + 7, monkeys);
     }
+
+    play() {
+        for(let i = 0; i < this.rounds; i++) {
+            this.monkeys.forEach(monkey => {
+                monkey.inspect(this.monkeys);
+            });
+        }
+    }
+
+    calculateMonkeyBusiness() {
+        this.monkeys.sort(compare).reverse();
+
+        return this.monkeys[0].inspectCounter * this.monkeys[1].inspectCounter;
+    }    
 }
 
 module.exports = KeepAway;

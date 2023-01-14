@@ -20,7 +20,9 @@ class Operation {
     }
 
     run(item) {
-        if(isNaN(this.value)) this.value = item;
+        if(isNaN(this.value)) {
+            return item * item;
+        }
 
         switch(this.operator) {
             case "+":
