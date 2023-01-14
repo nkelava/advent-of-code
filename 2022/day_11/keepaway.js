@@ -7,6 +7,7 @@ class KeepAway {
     constructor(notes, rounds) {
         this.monkeys = this.parseNotes(notes, 0, []);
         this.rounds = rounds;
+        this.bigMod = this.getBigMod();
     }
 
     parseNotes(notes, monkeyStartIndex, monkeys) {
@@ -37,7 +38,7 @@ class KeepAway {
     play() {
         for(let i = 0; i < this.rounds; i++) {
             this.monkeys.forEach(monkey => {
-                monkey.inspect(this.monkeys);
+                monkey.inspect(this.monkeys, this.bigMod);
             });
         }
     }
@@ -46,7 +47,15 @@ class KeepAway {
         this.monkeys.sort(compare).reverse();
 
         return this.monkeys[0].inspectCounter * this.monkeys[1].inspectCounter;
-    }    
+    }
+    
+    getBigMod() {
+        let mod = 1;
+
+        this.monkeys.forEach(monkey => mod *= monkey.test.value);
+
+        return mod;
+    }
 }
 
 module.exports = KeepAway;
