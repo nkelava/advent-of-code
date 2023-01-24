@@ -1,13 +1,14 @@
 const Monkey = require("./monkey");
 const Operation = require("./operation");
 const Test = require("./test");
-const compare = require("./utils");
+const { compareDesc } = require("./utils");
 
 class KeepAway {
-    constructor(notes, rounds) {
+    constructor(notes, rounds, isRelieved) {
         this.monkeys = this.parseNotes(notes, 0, []);
         this.rounds = rounds;
-        this.bigMod = this.getBigMod();
+        this.isRelieved = isRelieved;
+        this.lowestCommonMultiple = this.getLowestCommonMultiple();
     }
 
     parseNotes(notes, monkeyStartIndex, monkeys) {
@@ -38,18 +39,19 @@ class KeepAway {
     play() {
         for(let i = 0; i < this.rounds; i++) {
             this.monkeys.forEach(monkey => {
-                monkey.inspect(this.monkeys, this.bigMod);
+                monkey.inspect(this.monkeys, this.isRelieved, this.lowestCommonMultiple);
             });
         }
     }
 
     calculateMonkeyBusiness() {
-        this.monkeys.sort(compare).reverse();
+        this.monkeys.sort(compareDesc);
 
         return this.monkeys[0].inspectCounter * this.monkeys[1].inspectCounter;
     }
     
-    getBigMod() {
+    // TODO: use reduce
+    getLowestCommonMultiple() {
         let mod = 1;
 
         this.monkeys.forEach(monkey => mod *= monkey.test.value);
