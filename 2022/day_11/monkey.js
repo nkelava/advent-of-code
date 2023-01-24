@@ -11,10 +11,10 @@ class Monkey {
         this.items.push(item);
     }
 
-    inspect(monkeys, isRelieved, lowestCommonMultiple) {
+    inspect(monkeys, isRelieved, commonDenominator) {
         this.items.forEach(item => {
             item = this.operation.run(item);
-            item = (isRelieved) ? Math.floor(item / 3) : Math.floor(item % lowestCommonMultiple);
+            item = (isRelieved) ? Math.floor(item / 3) : Math.floor(item % commonDenominator);
             this.test.run(item);
             this.inspectCounter++;
             monkeys[this.test.throwTo].addItem(item);

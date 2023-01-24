@@ -8,7 +8,7 @@ class KeepAway {
         this.monkeys = this.parseNotes(notes, 0, []);
         this.rounds = rounds;
         this.isRelieved = isRelieved;
-        this.lowestCommonMultiple = this.getLowestCommonMultiple();
+        this.commonDenominator = this.findCommonDenominator();
     }
 
     parseNotes(notes, monkeyStartIndex, monkeys) {
@@ -39,7 +39,7 @@ class KeepAway {
     play() {
         for(let i = 0; i < this.rounds; i++) {
             this.monkeys.forEach(monkey => {
-                monkey.inspect(this.monkeys, this.isRelieved, this.lowestCommonMultiple);
+                monkey.inspect(this.monkeys, this.isRelieved, this.commonDenominator);
             });
         }
     }
@@ -50,7 +50,7 @@ class KeepAway {
         return this.monkeys[0].inspectCounter * this.monkeys[1].inspectCounter;
     }
     
-    getLowestCommonMultiple() {
+    findCommonDenominator() {
         return this.monkeys.reduce((multiple, monkey) => {
             multiple * monkey.test.value;
         }, 1);
