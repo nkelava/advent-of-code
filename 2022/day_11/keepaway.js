@@ -50,13 +50,10 @@ class KeepAway {
         return this.monkeys[0].inspectCounter * this.monkeys[1].inspectCounter;
     }
     
-    // TODO: use reduce
     getLowestCommonMultiple() {
-        let mod = 1;
-
-        this.monkeys.forEach(monkey => mod *= monkey.test.value);
-
-        return mod;
+        return this.monkeys.reduce((multiple, monkey) => {
+            multiple * monkey.test.value;
+        }, 1);
     }
 }
 
