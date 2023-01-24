@@ -3,6 +3,7 @@ const KeepAway = require("./keepaway");
 
 try {
     const notes = fs.readFileSync("./input.txt", "utf-8").replace(/\r/g, "").split("\n");
+    // Change isRelieved to false if you want to test part 2 of the task
     const isRelieved = true;
     const rounds = (isRelieved) ? 20 : 10000;
     const keepAway = new KeepAway(notes, rounds, isRelieved);
