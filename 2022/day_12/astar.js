@@ -5,10 +5,9 @@ class AStar {
         this.heightmap = heightmap;
         this.start = this.findPosition(heightmap, "S");
         this.end = this.findPosition(heightmap, "E");
+        this.current = this.start;
         this.elevationDifference = 1;
-        this.fscore = 0;
-        this.gscore = 0;
-        this.visited = [];
+        this.openSet = [];
     }
 
     findPosition(heightmap, symbol) {
