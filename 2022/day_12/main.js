@@ -1,12 +1,17 @@
 const fs = require("fs");
 const AStar = require("./astar");
+const Heightmap = require("./heightmap");
 
 try {
-    const heightmap = fs.readFileSync("./test.txt", "utf-8").replace(/\r/g, "").split("\n");
+    const map = fs.readFileSync("./test.txt", "utf-8").replace(/\r/g, "").split("\n");
+    const start = { mark: "S", elevation: "a" }
+    const end = { mark: "E", elevation: "z" };
+    const heightmap = new Heightmap(map, start, end);
+    const astar = new AStar();
 
-    const astar = new AStar(heightmap);
-
-    console.log(`Start: (${astar.start.column}, ${astar.start.row})\nEnd: (${astar.end.column}, ${astar.end.row})`);
+    astar.findPath(heightmap);
+    
+    console.log(astar.path.length)
 } catch (error) {
     console.log(error);
 }
