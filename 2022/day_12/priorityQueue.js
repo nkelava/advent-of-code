@@ -10,7 +10,7 @@ class PriorityQueue {
             let added = false;
 
             for(let i = 0; i < this.queue.length; i++) {
-                if(element.fScore < this.queue[i].fScore) {
+                if(element.fScore <= this.queue[i].fScore) {
                     this.queue.splice(i, 0, element);
                     added = true;
                     break;           
@@ -32,12 +32,15 @@ class PriorityQueue {
     }
 
     find(obj) {
+        let found = false;
+
         this.queue.forEach(item => {
             if(item.row === obj.row && item.column === obj.column && item.parent === obj.parent) {
-                return true;
+                found = true;
             }
         });
-        return false;
+        
+        return found;
     }
 
     peek() {
