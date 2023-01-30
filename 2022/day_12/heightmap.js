@@ -21,7 +21,7 @@ class Heightmap {
         return null;
     }
 
-    getElevation(row, column) {
+    getElevationAt(row, column) {
         return this.map[row][column];
     }
 }

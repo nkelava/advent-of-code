@@ -22,19 +22,19 @@ class Position {
         const left = this.column - 1;
 
         if(up > 0) {
-            this.addNeighbour(up, this.column, heightmap.getElevation(up, this.column), this);
+            this.addNeighbour(up, this.column, heightmap.getElevationAt(up, this.column), this);
         }
 
         if(right < heightmap.width) {
-            this.addNeighbour(this.row, right, heightmap.getElevation(this.row, right), this);
+            this.addNeighbour(this.row, right, heightmap.getElevationAt(this.row, right), this);
         }
 
         if(down < heightmap.height) {
-            this.addNeighbour(down, this.column, heightmap.getElevation(down, this.column), this);
+            this.addNeighbour(down, this.column, heightmap.getElevationAt(down, this.column), this);
         }
 
         if(left > 0) {
-            this.addNeighbour(this.row, left, heightmap.getElevation(this.row, left), this);
+            this.addNeighbour(this.row, left, heightmap.getElevationAt(this.row, left), this);
         }
     }
 
