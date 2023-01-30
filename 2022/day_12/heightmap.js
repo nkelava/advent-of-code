@@ -7,7 +7,7 @@ class Heightmap {
         this.end = this.findPosition(heightmap, end.mark, end.elevation);
         this.elevationDifferenceUp = 1;
         this.height = heightmap.length;
-        this.width = heightmap.at(0).length;
+        this.width = heightmap[0].length;
     }
 
     findPosition(heightmap, mark, elevation) {
