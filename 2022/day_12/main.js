@@ -8,15 +8,19 @@ try {
     const start = { mark: "S", elevation: "a" }
     const end = { mark: "E", elevation: "z" };
     const heightmap = new Heightmap(map, start, end);
+    const isAstar = false;
 
-    // const astar = new AStar();
+    if(isAstar) {
+        // const astar = new AStar();
+    
+        // astar.findPath(heightmap);
+        // console.log(astar.path.length)
+    } else {
+        const bfs = new BFS();
+        bfs.findPath(heightmap);
 
-    // astar.findPath(heightmap);
-    // console.log(astar.path.length)
-
-    const bfs = new BFS();
-    bfs.findPath(heightmap);
-    console.log(bfs.path.length + 1);
+        console.log(`Fewest steps required to move to the location: ${bfs.path.length + 1}.`);
+    }
 } catch (error) {
     console.log(error);
 }
