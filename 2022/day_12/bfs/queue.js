@@ -8,7 +8,7 @@ class Queue {
     }
 
     dequeue() {
-        this.queue.shift();
+        return this.queue.shift();
     }
 
     front() {
@@ -24,12 +24,15 @@ class Queue {
     }
 
     find(obj) {
-        for(let i = 0; i < this.queue.length; i++) {
-            if(this.queue[i].row === obj.row && this.queue[i].column === obj.column) {
-                return true;
+        let isFound = false;
+        
+        this.queue.forEach(item => {
+            if(item.row === obj.row && item.column === obj.column) {
+                isFound = true;
             }
-        }
-        return false;
+        })
+
+        return isFound;
     }
 }
 

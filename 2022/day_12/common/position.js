@@ -11,7 +11,12 @@ class Position {
     }
 
     addNeighbour(row, column, elevation, parent) {
-        const neighbour = new Position(row, column, elevation, parent)
+        if(elevation === "E") { elevation = "z" };
+        if(elevation === "S") { elevation = "a" };
+        const diff = elevation.charCodeAt(0) - this.elevation.charCodeAt(0);
+        if(diff > 1) return;
+        
+        const neighbour = new Position(row, column, elevation, parent);
         this.neighbours.push(neighbour);
     }
 
@@ -21,7 +26,7 @@ class Position {
         const down = this.row + 1;
         const left = this.column - 1;
 
-        if(up > 0) {
+        if(up >= 0) {
             this.addNeighbour(up, this.column, heightmap.getElevationAt(up, this.column), this);
         }
 
@@ -33,7 +38,7 @@ class Position {
             this.addNeighbour(down, this.column, heightmap.getElevationAt(down, this.column), this);
         }
 
-        if(left > 0) {
+        if(left >= 0) {
             this.addNeighbour(this.row, left, heightmap.getElevationAt(this.row, left), this);
         }
     }
