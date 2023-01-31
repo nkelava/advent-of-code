@@ -18,11 +18,12 @@ class BFS {
 
     findPath(heightmap) {
         let current = heightmap.start;
-        const queue = new Queue();
-        queue.enqueue(current);
-        const visited = new Queue();
-        visited.enqueue(current);
         let neighbour = null;
+        const queue = new Queue();
+        const visited = new Queue();
+
+        queue.enqueue(current);
+        visited.enqueue(current);
 
         while(!queue.isEmpty()) {
             current = queue.dequeue();
