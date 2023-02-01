@@ -7,24 +7,19 @@ class PriorityQueue {
         if(this.isEmpty()) {
             this.queue.push(element);
         } else {
-            let added = false;
-
             for(let i = 0; i < this.queue.length; i++) {
                 if(element.fScore <= this.queue[i].fScore) {
                     this.queue.splice(i, 0, element);
-                    added = true;
-                    break;           
+                    return;           
                 }
             }
-
-            if(!added) {
-                this.queue.push(element);
-            }
+            
+            this.queue.push(element);
         }
     }
 
     dequeue() {
-        this.queue.shift();  
+        return this.queue.shift();  
     }
 
     front() {
@@ -35,7 +30,7 @@ class PriorityQueue {
         let found = false;
 
         this.queue.forEach(item => {
-            if(item.row === obj.row && item.column === obj.column && item.parent === obj.parent) {
+            if(item.row === obj.row && item.column === obj.column) {
                 found = true;
             }
         });
@@ -53,6 +48,12 @@ class PriorityQueue {
 
     isEmpty() {
         return (this.queue.length < 1);
+    }
+
+    print(what) {
+        console.log(what);
+        this.queue.forEach(position => console.log(`${position.row}, ${position.column}`))
+        console.log("\n")
     }
 }
 
