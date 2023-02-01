@@ -4,23 +4,17 @@ const Heightmap = require("./common/heightmap");
 const BFS = require("./bfs/bfs");
 
 try {
-    const map = fs.readFileSync("./input.txt", "utf-8").replace(/\r/g, "").split("\n");
+    const map = fs.readFileSync("./test.txt", "utf-8").replace(/\r/g, "").split("\n");
     const start = { mark: "S", elevation: "a" }
     const end = { mark: "E", elevation: "z" };
     const heightmap = new Heightmap(map, start, end);
-    const isAstar = false;
+    // Change isAstar to true to test A* algorithm
+    const isAstar = true;
+    const algorithm = (isAstar) ? new AStar() : new BFS();
 
-    if(isAstar) {
-        // const astar = new AStar();
-    
-        // astar.findPath(heightmap);
-        // console.log(astar.path.length)
-    } else {
-        const bfs = new BFS();
-        bfs.findPath(heightmap);
+    algorithm.findPath(heightmap);
 
-        console.log(`Fewest steps required to move to the location: ${bfs.path.length + 1}.`);
-    }
+    console.log(`Fewest steps required to move to the location: ${algorithm.path.length}.`);
 } catch (error) {
     console.log(error);
 }
