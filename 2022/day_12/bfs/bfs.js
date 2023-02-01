@@ -8,7 +8,7 @@ class BFS {
     reconstructPath(current) {
         let path = [];
 
-        while(current.parent) {
+        while(current) {
             path.push(current);
             current = current.parent;
         }
