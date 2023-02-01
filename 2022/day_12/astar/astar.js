@@ -18,47 +18,35 @@ class AStar {
 
     findPath(heightmap) {
         let current = heightmap.start;
-        current.calculateScores(heightmap.end);
+        let neighbour = null;
         const openSet = new PriorityQueue();
         const closedSet = new PriorityQueue();
-
+        
+        current.calculateScores(heightmap.end);
         openSet.enqueue(current);
 
-        while(openSet.isEmpty() === false) {
-            current = openSet.front();
-            console.log(`${current.row}, ${current.column}`)
-
-            if(current.isEqual(heightmap.end)) {
-                this.path = this.reconstructPath(current);
-                break;
-            }
-            
-            openSet.dequeue();
+        while(!openSet.isEmpty()) {
+            current = openSet.dequeue();
             closedSet.enqueue(current);
+            // current.print();
+            
             current.setNeighbours(heightmap);
-            const temp = new PriorityQueue();
-
-            current.neighbours.forEach(neighbour => {
-                neighbour.calculateScores(heightmap.end);
-
-                if(!openSet.find(neighbour)) {
-                    openSet.enqueue(neighbour);
-                }
+            
+            for(let i = 0; i < current.neighbours.length; i++) {
+                neighbour = current.neighbours[i];
                 
-                // if(neighbour.fScore <= current.fScore) {
-                //     if(!this.priorityQueue.find(neighbour)) {
-                //         this.priorityQueue.enqueue(neighbour);
-                //     }
-                // }
-            });
+                if(openSet.find(neighbour)) continue;
+                if(closedSet.find(neighbour)) continue;
 
-            // for(let i = 0; i < temp.queue.length; i++) {
-            //     const neighbour = temp.queue[i];
+                if(neighbour.isEqual(heightmap.end)) {
+                    this.path = this.reconstructPath(current);
+                    return;
+                }
 
-            //     if(!closedSet.find(neighbour)) {
-            //         openSet.enqueue(neighbour);
-            //     }
-            // }
+
+                neighbour.calculateScores(heightmap.end);
+                openSet.enqueue(neighbour);
+            };
         }
     }
 }
