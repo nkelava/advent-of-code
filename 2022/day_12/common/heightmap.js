@@ -25,6 +25,20 @@ class Heightmap {
     getElevationAt(row, column) {
         return this.map[row][column];
     }
+
+    getPositionsByElevation(elevation) {
+        const positions = [];
+
+        this.map.forEach((row, rowIndex) => {
+            row.forEach((column, columnIndex) => {
+                if(column === elevation) {
+                    positions.push(new Position(rowIndex, columnIndex, elevation));
+                }
+            })
+        })
+
+        return positions;
+    }
 }
 
 module.exports = Heightmap;
