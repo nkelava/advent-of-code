@@ -28,7 +28,6 @@ class AStar {
         while(!openSet.isEmpty()) {
             current = openSet.dequeue();
             closedSet.enqueue(current);
-            // current.print();
             
             current.setNeighbours(heightmap);
             
@@ -42,7 +41,6 @@ class AStar {
                     this.path = this.reconstructPath(current);
                     return;
                 }
-
 
                 neighbour.calculateScores(heightmap.end);
                 openSet.enqueue(neighbour);
