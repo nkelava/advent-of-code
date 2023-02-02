@@ -10,9 +10,9 @@ class Position {
         this.fScore = 0;
     }
 
-    addNeighbour(row, column, elevation, parent) {
+    addNeighbour(row, column, elevation, elevationDiff, parent) {
         const diff = elevation.charCodeAt(0) - this.elevation.charCodeAt(0);
-        if(diff > 1) return;
+        if(diff > elevationDiff) return;
         
         const neighbour = new Position(row, column, elevation, parent);
         this.neighbours.push(neighbour);
@@ -25,19 +25,19 @@ class Position {
         const left = this.column - 1;
 
         if(up >= 0) {
-            this.addNeighbour(up, this.column, heightmap.getElevationAt(up, this.column), this);
+            this.addNeighbour(up, this.column, heightmap.getElevationAt(up, this.column), heightmap.elevationDiff, this);
         }
 
         if(right < heightmap.width) {
-            this.addNeighbour(this.row, right, heightmap.getElevationAt(this.row, right), this);
+            this.addNeighbour(this.row, right, heightmap.getElevationAt(this.row, right), heightmap.elevationDiff, this);
         }
 
         if(down < heightmap.height) {
-            this.addNeighbour(down, this.column, heightmap.getElevationAt(down, this.column), this);
+            this.addNeighbour(down, this.column, heightmap.getElevationAt(down, this.column), heightmap.elevationDiff, this);
         }
 
         if(left >= 0) {
-            this.addNeighbour(this.row, left, heightmap.getElevationAt(this.row, left), this);
+            this.addNeighbour(this.row, left, heightmap.getElevationAt(this.row, left), heightmap.elevationDiff, this);
         }
     }
 
