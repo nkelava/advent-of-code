@@ -12,7 +12,7 @@ try {
     // Change isAstar to:
     //      - true to test A* algorithm
     //      - false to test BFS algorithm
-    const isAstar = true;
+    const isAstar = false;
     const algorithm = (isAstar) ? new AStar() : new BFS();
 
     let path = algorithm.findPath(heightmap);
