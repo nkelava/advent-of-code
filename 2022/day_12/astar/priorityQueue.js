@@ -26,18 +26,6 @@ class PriorityQueue {
         return this.queue[0];
     }
 
-    find(obj) {
-        let found = false;
-
-        this.queue.forEach(item => {
-            if(item.row === obj.row && item.column === obj.column) {
-                found = true;
-            }
-        });
-        
-        return found;
-    }
-
     peek() {
         console.log(this.queue[0]);
     }
@@ -50,10 +38,16 @@ class PriorityQueue {
         return (this.queue.length < 1);
     }
 
-    print(what) {
-        console.log(what);
-        this.queue.forEach(position => console.log(`${position.row}, ${position.column}`))
-        console.log("\n")
+    find(obj) {
+        let found = false;
+
+        this.queue.forEach(item => {
+            if(item.row === obj.row && item.column === obj.column) {
+                found = true;
+            }
+        });
+        
+        return found;
     }
 }
 
