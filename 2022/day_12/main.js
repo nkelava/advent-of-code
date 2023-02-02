@@ -4,11 +4,13 @@ const Heightmap = require("./common/heightmap");
 const BFS = require("./bfs/bfs");
 
 try {
-    const map = fs.readFileSync("./test.txt", "utf-8").replace(/\r/g, "").split("\n");
+    const map = fs.readFileSync("./input.txt", "utf-8").replace(/\r/g, "").split("\n");
     const start = { mark: "S", elevation: "a" }
     const end = { mark: "E", elevation: "z" };
     const heightmap = new Heightmap(map, start, end);
-    // Change isAstar to true to test A* algorithm
+    // Change isAstar to:
+    //      - true to test A* algorithm
+    //      - false to test BFS algorithm
     const isAstar = true;
     const algorithm = (isAstar) ? new AStar() : new BFS();
 
