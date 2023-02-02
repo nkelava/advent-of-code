@@ -11,8 +11,6 @@ class Position {
     }
 
     addNeighbour(row, column, elevation, parent) {
-        if(elevation === "E") { elevation = "z" };
-        if(elevation === "S") { elevation = "a" };
         const diff = elevation.charCodeAt(0) - this.elevation.charCodeAt(0);
         if(diff > 1) return;
         

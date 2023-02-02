@@ -14,6 +14,7 @@ class Heightmap {
         for(let row = 0; row < heightmap.length; row++) {
             for(let column = 0; column < heightmap[0].length; column++) {
                 if(heightmap[row][column] === mark) {
+                    heightmap[row][column] = elevation;
                     return new Position(row, column, elevation);
                 }
             }

@@ -4,7 +4,7 @@ const Heightmap = require("./common/heightmap");
 const BFS = require("./bfs/bfs");
 
 try {
-    const map = fs.readFileSync("./input.txt", "utf-8").replace(/\r/g, "").split("\n");
+    const map = fs.readFileSync("./test.txt", "utf-8").replace(/\r/g, "").split("\n").map(row => row.split(""));
     const start = { mark: "S", elevation: "a" }
     const end = { mark: "E", elevation: "z" };
     const heightmap = new Heightmap(map, start, end);
