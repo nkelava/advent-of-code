@@ -1,4 +1,5 @@
 const fs = require("fs");
+const packetHandler = require("./packetHandler");
 
 function parsePackets(input) {
   const step = 2;
@@ -21,7 +22,12 @@ try {
 
   const packetPairs = parsePackets(packets);
 
-  console.log(packetPairs);
+  packetPairs.forEach((packetPair) => {
+    const left = JSON.parse(packetPair[0]);
+    const right = JSON.parse(packetPair[1]);
+
+    packetHandler.compare(left, right);
+  });
 } catch (error) {
   console.error(error);
 }
