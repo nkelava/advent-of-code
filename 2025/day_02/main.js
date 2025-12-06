@@ -1,49 +1,42 @@
 import fs from "node:fs";
 
-function getInvalidIdsInRange(start, end) {
-  const invalidIds = [];
-  const startLen = String(start).length;
-  const endLen = String(end).length;
+function isRepeatedPattern(num, exactReps = null, minReps = 2) {
+  const str = String(num);
+  const len = str.length;
 
-  const minPatternLen = Math.ceil(startLen / 2);
-  const maxPatternLen = Math.ceil(endLen / 2);
+  for (let patternLen = 1; patternLen < len; patternLen++) {
+    if (len % patternLen !== 0) continue;
 
-  // For each possible pattern length (half of total digits)
-  for (
-    let patternLen = minPatternLen;
-    patternLen <= maxPatternLen;
-    patternLen++
-  ) {
-    const minPattern = Math.pow(10, patternLen - 1);
-    const maxPattern = Math.pow(10, patternLen) - 1;
+    const reps = len / patternLen;
 
-    for (let pattern = minPattern; pattern <= maxPattern; pattern++) {
-      // Skip patterns with leading zeros (like 01)
-      if (String(pattern).length !== patternLen) continue;
+    // Check for exact repetitions OR minimum repetitions
+    if (exactReps !== null) {
+      if (reps !== exactReps) continue;
+    } else {
+      if (reps < minReps) continue;
+    }
 
-      // Create the repeated ID (e.g. 123 -> 123123)
-      const repeatedId = Number(String(pattern) + String(pattern));
+    const pattern = str.substring(0, patternLen);
 
-      // Check if this ID falls within our range
-      if (repeatedId >= start && repeatedId <= end) {
-        invalidIds.push(repeatedId);
-      }
-
-      if (repeatedId > end) break;
+    if (pattern.repeat(reps) === str) {
+      return true;
     }
   }
 
-  return invalidIds;
+  return false;
 }
 
-function calculateInvalidIdSum(ranges) {
+function calculateInvalidIdSum(ranges, exactReps = null, minReps = 2) {
   let sum = 0;
 
   for (const range of ranges) {
     const [start, end] = range.trim().split("-").map(Number);
 
-    const invalidIds = getInvalidIdsInRange(start, end);
-    sum += invalidIds.reduce((acc, id) => acc + id, 0);
+    for (let id = start; id <= end; id++) {
+      if (isRepeatedPattern(id, exactReps, minReps)) {
+        sum += id;
+      }
+    }
   }
 
   return sum;
@@ -54,10 +47,15 @@ try {
     .readFileSync("./input.txt", "utf-8")
     .replace(/\r/g, "")
     .trim();
-
   const ranges = input.split("\n").flatMap((line) => line.split(","));
-  const sum = calculateInvalidIdSum(ranges);
-  console.log(`Sum of invalid IDs: ${sum}`);
+
+  const exactlyTwiceSum = calculateInvalidIdSum(ranges, 2, null);
+  console.log(`Sum of invalid IDs (exactly 2 repetitions): ${exactlyTwiceSum}`);
+
+  const atLeastTwiceSum = calculateInvalidIdSum(ranges, null, 2);
+  console.log(
+    `Sum of invalid IDs (at least 2 repetitions): ${atLeastTwiceSum}`,
+  );
 } catch (error) {
   console.error(error);
 }
