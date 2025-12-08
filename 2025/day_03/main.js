@@ -1,47 +1,53 @@
 import fs from "node:fs";
 
-function getLargestJoltage(bank) {
-  let largestJoltage = 0;
+function getLargestJoltage(batteryBank) {
+  let maxJoltage = 0;
 
-  const sortedBankDesc = [...bank]
-    .map((battery, idx) => ({ idx, battery: Number(battery) }))
-    .sort((a, b) => b.battery - a.battery);
+  const batteriesByValue = [...batteryBank]
+    .map((digit, position) => ({
+      position,
+      value: Number(digit),
+    }))
+    .sort((a, b) => b.value - a.value);
 
-  if (sortedBankDesc[0].idx < sortedBankDesc[1].idx) {
-    largestJoltage += sortedBankDesc[0].battery + sortedBankDesc[1].battery;
+  const highest = batteriesByValue[0];
+  const secondHighest = batteriesByValue[1];
+
+  if (highest.position < secondHighest.position) {
+    maxJoltage = highest.value * 10 + secondHighest.value;
   } else {
-    const largerIndex = sortedBankDesc.findIndex(
-      (bank) => bank.idx > sortedBankDesc[0].idx,
+    const firstBatteryAfterHighest = batteriesByValue.findIndex(
+      (battery) => battery.position > highest.position,
     );
 
-    largestJoltage +=
-      largerIndex < 0
-        ? sortedBankDesc[1].battery + sortedBankDesc[0].battery
-        : sortedBankDesc[0].battery + sortedBankDesc[largerIndex].battery;
+    maxJoltage =
+      firstBatteryAfterHighest < 0
+        ? secondHighest.value * 10 + highest.value
+        : highest.value * 10 + batteriesByValue[firstBatteryAfterHighest].value;
   }
 
-  return largestJoltage;
+  return maxJoltage;
 }
 
-function getTotalOutputJoltage(banks) {
-  let sum = 0;
+function getTotalOutputJoltage(batteryBanks) {
+  let totalJoltage = 0;
 
-  banks.forEach((bank) => {
-    sum += getLargestJoltage(bank);
+  batteryBanks.forEach((bank) => {
+    totalJoltage += getLargestJoltage(bank);
   });
 
-  return sum;
+  return totalJoltage;
 }
 
 try {
   const input = fs
-    .readFileSync("./input2.txt", "utf-8")
+    .readFileSync("./input.txt", "utf-8")
     .replace(/\r/g, "")
     .trim();
 
-  const banks = input.split("\n");
-  const sum = getTotalOutputJoltage(banks);
-  console.log(`Total output joltage is ${sum}.`);
+  const batteryBanks = input.split("\n");
+  const total = getTotalOutputJoltage(batteryBanks);
+  console.log(`Total output joltage is ${total}.`);
 } catch (error) {
   console.error(error);
 }
