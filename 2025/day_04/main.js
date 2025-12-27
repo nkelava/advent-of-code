@@ -28,7 +28,6 @@ function checkAdjecentPositions(diagram, row, column) {
 
 function calculateAccessableRollsOfPaper(diagram) {
   let totalRolls = 0;
-  let count = 0;
 
   for (let row = 0; row < diagram.length; ++row) {
     for (let column = 0; column < diagram[row].length; ++column) {
@@ -37,7 +36,37 @@ function calculateAccessableRollsOfPaper(diagram) {
       }
     }
   }
-  console.log(count);
+
+  return totalRolls;
+}
+
+function calculateRemovableRollsOfPaper(diagram) {
+  let totalRolls = 0;
+  let isEnd = false;
+
+  do {
+    let hasRemovedRollOfPaper = false;
+
+    for (let row = 0; row < diagram.length; ++row) {
+      for (let column = 0; column < diagram[row].length; ++column) {
+        if (diagram[row][column] === "@") {
+          if (checkAdjecentPositions(diagram, row, column)) {
+            diagram[row] =
+              diagram[row].substring(0, column) +
+              "." +
+              diagram[row].slice(column + 1);
+            totalRolls += 1;
+            hasRemovedRollOfPaper = true;
+          }
+        }
+      }
+    }
+
+    if (!hasRemovedRollOfPaper) {
+      isEnd = true;
+    }
+  } while (!isEnd);
+
   return totalRolls;
 }
 
@@ -51,6 +80,11 @@ try {
   const totalAccessableRolls = calculateAccessableRollsOfPaper(diagram);
   console.log(
     `Number of rolls of paper that can be accessed by a forklift: ${totalAccessableRolls}`,
+  );
+
+  const totalRemovableRolls = calculateRemovableRollsOfPaper(diagram);
+  console.log(
+    `Number of rolls of paper that can be remove: ${totalRemovableRolls}`,
   );
 } catch (error) {
   console.error(error);
