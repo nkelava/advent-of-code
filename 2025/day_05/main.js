@@ -1,17 +1,24 @@
 import fs from "node:fs";
 
-function validateIngredient(range, ingredientID) {
-  const [start, end] = range.split("-");
-  return (
-    BigInt(ingredientID) >= BigInt(start) && BigInt(ingredientID) <= BigInt(end)
-  );
+function parseRanges(rangeList) {
+  return rangeList.map((range) => {
+    const [start, end] = range.split("-");
+    return [BigInt(start), BigInt(end)];
+  });
 }
+
+function validateIngredient(range, ingredientID) {
+  return ingredientID >= range[0] && ingredientID <= range[1];
+}
+
 function getFreshIngredientCount(rangeList, ingredients) {
+  const parsedRanges = parseRanges(rangeList);
   let freshIngredientsCount = 0;
 
   for (const ingredient of ingredients) {
-    for (let range of rangeList) {
-      if (validateIngredient(range, ingredient)) {
+    const ingredientID = BigInt(ingredient);
+    for (let range of parsedRanges) {
+      if (validateIngredient(range, ingredientID)) {
         freshIngredientsCount++;
         break;
       }
