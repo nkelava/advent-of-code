@@ -1,10 +1,36 @@
 import fs from "node:fs";
 
 function parseRanges(rangeList) {
+  console.log(rangeList);
   return rangeList.map((range) => {
     const [start, end] = range.split("-");
-    return [BigInt(start), BigInt(end)];
+    return [Number(start), Number(end)];
   });
+}
+
+function checkOverlap(firstRange, secondRange) {
+  return (
+    Math.max(firstRange[0], secondRange[0]) <=
+    Math.min(firstRange[1], secondRange[1])
+  );
+}
+
+function mergeRanges(expirationRangeList) {
+  const parsedRanges = parseRanges(expirationRangeList).sort(
+    (a, b) => a[0] - b[0],
+  );
+  const endIndex = expirationRangeList.length - 1;
+
+  for (let i = 0; i < endIndex; ++i) {
+    const isOverlaping = checkOverlap(parsedRanges[i], parsedRanges[i + 1]);
+    console.log(
+      "Ranges ",
+      parsedRanges[i],
+      " and ",
+      parsedRanges[i + 1],
+      `${isOverlaping ? "overlaps." : "doesn't overlap."}`,
+    );
+  }
 }
 
 function validateIngredient(range, ingredientID) {
@@ -30,20 +56,22 @@ function getFreshIngredientCount(rangeList, ingredients) {
 
 try {
   const input = fs
-    .readFileSync("./input.txt", "utf-8")
+    .readFileSync("./input2.txt", "utf-8")
     .replace(/\r/g, "")
     .trim()
     .split("\n\n");
 
   const expirationRangeList = input[0].split("\n");
-  const ingredientIDs = input[1].split("\n");
+  // const ingredientIDs = input[1].split("\n");
 
-  const freshIgredientCount = getFreshIngredientCount(
-    expirationRangeList,
-    ingredientIDs,
-  );
+  // const freshIgredientCount = getFreshIngredientCount(
+  //   expirationRangeList,
+  //   ingredientIDs,
+  // );
+  //
+  const mergedRanges = mergeRanges(expirationRangeList);
 
-  console.log(`There are ${freshIgredientCount} fresh ingredient IDs.`);
+  // console.log(`There are ${freshIgredientCount} fresh ingredient IDs.`);
 } catch (error) {
   console.error(error);
 }
